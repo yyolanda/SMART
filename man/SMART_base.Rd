@@ -15,7 +15,7 @@ SMART_base(
 )
 }
 \arguments{
-\item{stData}{a spot(rows)-by-gene(columns) matrix.}
+\item{stData}{a spot(rows)-by-gene(columns) spatial transcriptomics matrix.}
 
 \item{markerGs}{a list with marker genes for each cell type.}
 
