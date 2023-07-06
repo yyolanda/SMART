@@ -30,7 +30,7 @@ SMART_covariate <- function(stData, markerGs, covarDat, covars,
                             noMarkerCts=1, outDir='SMART_results',
                             seed=1, iterations=2000, priors=NULL){
   # read data
-  stData <- keyATM_read(texts = as.dfm(stData))
+  stData <- keyATM_read(texts = as.dfm(stData), keep_docnames = TRUE)
 
   # options
   my_options <- list(seed          = seed, # automatically generate random seed
@@ -46,7 +46,7 @@ SMART_covariate <- function(stData, markerGs, covarDat, covars,
                      parallel_init = FALSE)
 
   # modelling
-  covar_formula = as.formula(paste0("~ ",paste(covars,collapse = ' + ')))
+  covar_formula = stats::as.formula(paste0("~ ",paste(covars,collapse = ' + ')))
   if(!is.null(priors)){
     out <- keyATM(docs              = stData,
                   no_keyword_topics = noMarkerCts,

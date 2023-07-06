@@ -23,10 +23,11 @@
 #'                   outDir='SMART_results', seed=1, iterations=2000, prior=NULL)
 #' }
 SMART_base <- function(stData, markerGs, noMarkerCts=1,
-                       outDir='SMART_results', seed=1,
-                       iterations=2000, priors=NULL){
+         outDir='SMART_results', seed=1,
+         iterations=2000, priors=NULL){
+
   # read data
-  stData <- keyATM_read(texts = as.dfm(stData))
+  stData <- keyATM_read(texts = as.dfm(stData), keep_docnames = TRUE)
 
   # options
   my_options <- list(seed          = seed,
@@ -56,6 +57,9 @@ SMART_base <- function(stData, markerGs, noMarkerCts=1,
                   model             = "base",
                   options           = my_options)
   }
+
+  colnames(out$theta)=gsub('[0-9]{1,2}_(.*)','\\1',colnames(out$theta))
+  rownames(out$phi)=gsub('[0-9]{1,2}_(.*)','\\1',rownames(out$phi))
 
   # save the results
   resDir=paste0(outDir,'/inst_',seed,'/')

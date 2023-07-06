@@ -1,9 +1,8 @@
 Package: SMART
 Title: Spatial transcriptomics deconvolution using marker-gene-assisted topic models
-Version: 0.0.0.9000
+Version: 0.0.1
 Authors@R: 
-    person("ChenXi", "Yang", , "yolanda.yang@hli.ubc.ca", role = c("aut", "cre"),
-           comment = c(ORCID = "YOUR-ORCID-ID"))
+    person("ChenXi", "Yang", , "yolanda.yang@hli.ubc.ca", role = c("aut", "cre"))
 Description: What the package does (one paragraph).
 License: MIT + file LICENSE
 Encoding: UTF-8
@@ -12,7 +11,13 @@ RoxygenNote: 7.2.3
 Imports: 
     keyATM (>= 0.5.0),
     quanteda (>= 3.3.1),
-    stats
+    stats,
+    usedist,
+    vegan,
+    scatterpie,
+    ggthemes,
+    ggplot2,
+    dplyr
 URL: https://github.com/yyolanda/SMART
 BugReports: https://github.com/yyolanda/SMART/issues
 Depends: 

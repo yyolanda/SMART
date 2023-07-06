@@ -13,7 +13,7 @@ get_est(model, stData, covarDat, covar)
 
 \item{covarDat}{the covarDat used in SMART_covariate().}
 
-\item{covar}{a character value selecting the covariate estimate you would like to get (one covariate only).}
+\item{covar}{a character string selecting the covariate estimate you would like to get (one covariate at a time).}
 }
 \value{
 a cell type proportion matrix
