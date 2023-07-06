@@ -99,7 +99,7 @@ gseaRes=rbindlist(gseaRes)
 
 ### Run the two-stage model with example data
 
-The two-stage model of SMART takes the spatial transcriptomics data matrix (`stMat`), a list of marker gene symbols to be used to deconvolve cell types into major cell types (`markers_S1`), a list of marker gene symbols to be used to deconvolve the cell type of interest into its subtypes (`markers_S2`),  the cell type of interest (`CT_OI`), the cell type that is transcriptomically similar to the cell type of interest (`CT_similar`) as inputs.
+The two-stage model of SMART takes the spatial transcriptomics data matrix (`stData`), a list of marker gene symbols to be used to deconvolve cell types into major cell types (`markers_S1`), a list of marker gene symbols to be used to deconvolve the cell type of interest into its subtypes (`markers_S2`),  the cell type of interest (`CT_OI`), the cell type that is transcriptomically similar to the cell type of interest (`CT_similar`) as inputs.
 
 The `CT_similar` can be NULL, a character value specifying a cell type name, or 'auto' to automatically select the most similar cell type.
 
