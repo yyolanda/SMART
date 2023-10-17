@@ -24,7 +24,7 @@
 get_est <- function(model, stData, covarDat, covar){
   stData <- keyATM_read(texts = as.dfm(stData),keep_docnames = T)
   strata_tw <- by_strata_TopicWord(model, stData,
-                                   by = as.vector(covarDat[,covar]))
+                                   by = as.vector(unlist(covarDat[,covar])))
 
   colnames(strata_tw$theta)=gsub('[0-9]{1,2}_(.*)','\\1',colnames(strata_tw$theta))
   for(i in 1:length(strata_tw$phi)){
