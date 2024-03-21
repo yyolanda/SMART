@@ -9,16 +9,16 @@
 #' @import ggthemes
 #' @import ggplot2
 #' @import dplyr
+#' @import randomcoloR
 #' @export
 #'
 #' @examples
 #' \dontrun{
 #' SMART_scatterpie(visium_mouse_brain$loc,res$ct_proportions)
 #' }
+#'
 SMART_scatterpie <- function(stLoc,CT_prop,cols=NULL){
-  myColor=c('#377eb8','#ff7f00','#984ea3','#bebada','#ffff33',
-            '#e41a1c','#4daf4a','#fed9a6','#C6B18B','#B3B3B3')
-
+  nColor=ncol(CT_prop)
   val1=sort(unique(stLoc[,'x']))
   val2=dplyr::lag(val1,1)
   rds = mean(val1-val2, na.rm = T)
@@ -27,7 +27,7 @@ SMART_scatterpie <- function(stLoc,CT_prop,cols=NULL){
   stLoc=as.data.frame(stLoc) %>% mutate(id=rownames(.))
   CT_prop=left_join(CT_prop,stLoc)
   if(is.null(cols)){
-    cols=myColor
+    cols <- distinctColorPalette(nColor)
   }
   p = ggplot() +
     geom_scatterpie(aes(x=x, y=y, group=id, r=rds*0.95), data=CT_prop,

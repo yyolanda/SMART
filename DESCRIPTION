@@ -1,6 +1,6 @@
 Package: SMART
 Title: Spatial transcriptomics deconvolution using marker-gene-assisted topic models
-Version: 0.0.1
+Version: 0.0.2
 Authors@R: 
     person("ChenXi", "Yang", , "yolanda.yang@hli.ubc.ca", role = c("aut", "cre"))
 Description: What the package does (one paragraph).
@@ -17,7 +17,8 @@ Imports:
     scatterpie,
     ggthemes,
     ggplot2,
-    dplyr
+    dplyr,
+    randomcoloR
 URL: https://github.com/yyolanda/SMART
 BugReports: https://github.com/yyolanda/SMART/issues
 Depends: 

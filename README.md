@@ -53,6 +53,52 @@ SMART_scatterheatmap(visium_mouse_brain$loc,res$ct_proportions, celltype = 'Olig
 
 ![alt text](https://github.com/yyolanda/SMART/blob/main/figures/visium_mousebrain_Oligos_scatterheatmap.png?raw=true)
 
+You may also obtain more stable cell type composition by running multiple instances of SMART and averaging the results.
+
+``` r
+# the number of instances
+mc.cores=10
+
+# the output directory
+out.dir='SMART_results/testrun/'
+
+# set random starting values
+set.seed(1)
+seeds=sample(1:1000000,mc.cores,replace = FALSE)
+
+# for windows
+library(future)
+library(future.apply)
+plan(future.callr::callr,workers=mc.cores)
+res=future_lapply(seeds,
+  FUN = function(x) SMART_base(stData=visium_mouse_brain$stMat,
+                              markerGs=visium_mouse_brain$markers, 
+                              noMarkerCts=1, outDir=out.dir,
+                              seed=x),
+  future.stdout = TRUE,future.seed = NULL)
+
+tmp=lapply(res, function(x) x$ct_proportions/rowSums(x$ct_proportions))
+tmp2=Reduce('+', tmp)
+res_avg=tmp2/rowSums(tmp2)
+
+# for linux, you may also use
+library(doMC)
+doMC::registerDoMC(cores=mc.cores)
+foreach(i = seeds) %dopar% {
+  res <- SMART_base(stData=visium_mouse_brain$stMat, 
+                    markerGs=visium_mouse_brain$markers, 
+                    noMarkerCts=1, 
+                    outDir=out.dir, 
+                    seed=i)
+} 
+res=lapply(seeds,function(x) readRDS(paste0('SMART_results/testrun/inst_',x,'/base_model.rds')))
+tmp=lapply(res, function(x) x$theta/rowSums(x$theta))
+tmp2=Reduce('+', tmp)
+res_avg=tmp2/rowSums(tmp2)
+
+```
+Consider running it serially if there is not enough RAM. Running it in parallel also disables the progressing bar.
+
 ### Run the covariate model with example data
 
 The covariate model of SMART takes the spatial transcriptomics data matrix

@@ -23,4 +23,5 @@ a scatterpie plot showing the predicted cell type proportions of all cell types
 \dontrun{
 SMART_scatterpie(visium_mouse_brain$loc,res$ct_proportions)
 }
+
 }
