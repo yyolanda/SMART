@@ -12,6 +12,7 @@
 #' @param iterations the number of iterations (default: 2000).
 #' @param priors_S1 do not change the priors if you don't know what they are.
 #' @param priors_S2 do not change the priors if you don't know what they are.
+#' @param scalingF scale the data by this number before rounding them
 #'
 #' @return a model object
 #' @return a model
@@ -35,6 +36,7 @@ SMART_2S <- function(stData, markerGs_S1, markerGs_S2,
                      noMarkerCts_S1=1, noMarkerCts_S2=1,
                      CT_OI,CT_similar=NULL,
                      outDir='SMART_results', seed=1, iterations=2000,
+                     scalingF=1e7,
                      priors_S1=NULL, priors_S2=NULL){
 
   stopifnot(CT_OI %in% names(markerGs_S1))
@@ -71,7 +73,7 @@ SMART_2S <- function(stData, markerGs_S1, markerGs_S2,
     newX[[i]]=temp[,i] %*% t(SMART_res$model$phi[i,]) # counts by gene for a particular cell type
   }
   newX=Reduce('+', newX)
-  scalingF=max(1,floor(1e7/sum(newX)))
+  scalingF=max(1,floor(scalingF/sum(newX)))
   newX=newX * scalingF # scale the counts
   newX=apply(newX,c(1,2),round)
   rownames(newX)=rownames(SMART_res$model$theta)

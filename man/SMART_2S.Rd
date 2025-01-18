@@ -15,6 +15,7 @@ SMART_2S(
   outDir = "SMART_results",
   seed = 1,
   iterations = 2000,
+  scalingF = 1e+07,
   priors_S1 = NULL,
   priors_S2 = NULL
 )
@@ -39,6 +40,8 @@ SMART_2S(
 \item{seed}{the starting value.}
 
 \item{iterations}{the number of iterations (default: 2000).}
+
+\item{scalingF}{scale the data by this number before rounding them}
 
 \item{priors_S1}{do not change the priors if you don't know what they are.}
 
